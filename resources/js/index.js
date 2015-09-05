@@ -1,13 +1,5 @@
 
 
-var gPageIndex = 0;
-var gPageCount = 0;
-var gTotalScore = 0;
-var gCityIndex = 0;
-var gPlaceIndex = 0;
-
-var gCharacter = '';
-var gPlace = '';
 var gShareString = '职场就像动物园，各类生态，千奇百怪。你会是哪种萌物呢? 认识到自己在职场上的形象，更利于给自己做个适合的职场规划。赶快来测一测吧！！';
 
 var questionData = [
@@ -111,21 +103,8 @@ function showResult(characterType) {
   $("#result-title").html(result.title);
   $("#result-image").html(result.img);
   $("#result-description").html(result.description);
-
-  var imageX = 198 * gCityIndex;
-  var imageY = 142 * gPlaceIndex;
-  var resultImageMarginLeft = $(".result").width() / 2 - 198 / 2;
-  
-  // set place image
-  var resultImage = $("#result-image");
-  resultImage.css('background-position', "-" + imageX + "px -" + imageY + "px");
-  resultImage.css('margin-left', resultImageMarginLeft);
-  
-  // set place image filter
-  var resultImageFilter = $("#result-image-filter");
-  resultImageFilter.css("left", resultImage.position().left + 2);
-  resultImageFilter.css('top', resultImage.position().top + 2);
-  resultImageFilter.css('margin-left', resultImageMarginLeft);
+  hideAllPages();
+  $(".page").last().show();
 }
 
 function nextPage(index) {
@@ -134,7 +113,7 @@ function nextPage(index) {
 
     //gShareString = document.title = "我是" + gCharacter + ", 混迹于" + gPlace + ", 测测你在哪混";
     setupWXShare();
-    sendData("result", gTotalScore + "|" + document.title);
+
   } else {
     showPage(index);
   }
@@ -151,12 +130,6 @@ function showPage(pageIndex) {
   page.style.display = "block";
 }
 
-function sendData(title, detail) {
-  var xmlHttp = new XMLHttpRequest();
-  xmlHttp.open("GET", "http://114.215.201.178:8079/info?title=" + title + "&detail=" + detail + "&app_name=anjuke", true);
-  xmlHttp.send(null);
-}
-
 function showShareFriend() {
   $(".share-to-friend").show();
 }
@@ -171,14 +144,8 @@ $(document).ready(function () {
   $("body").height($(window).height());
 
   loadQuestions();
-  gPageIndex = gTotalScore = gCityIndex = gPlaceIndex = 0;
-  gCharacter = gPlace = '';
+  showPage(0);
 
-  gPageCount = $(".page").length;
-  showPage(gPageIndex);
-
-  sendData("enter", "startplay");
-  
   setupWXShare();
 });
 
@@ -219,9 +186,6 @@ function setupWXShare() {
     });
     wx.ready(function () {
       // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
-      console.log('ready');
-      // alert('ready');
-      
         wx.onMenuShareAppMessage({
           title: '安居客精英地图',
           desc: gShareString,
