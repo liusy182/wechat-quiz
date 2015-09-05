@@ -1,0 +1,226 @@
+p {
+  padding: 0;
+  margin: 5px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.page {
+  position: absolute;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.page.welcome {
+  background-image: url("../images/question-bg.jpg");
+  background-size: 100% 100%;
+  text-align: center;
+}
+
+.welcome-you {
+  font-size: 8em;
+  color: white;
+  margin-top: 20%;
+}
+
+.welcome-live-right {
+  font-size: 1em;
+  color: white;
+  margin-top: 25%;
+  margin-bottom: 15%;
+}
+
+.welcome-start {
+  width: 68px;
+  height: 68px;
+  background-image: url("../images/elements.png");
+  background-position: 0 0;
+  margin: auto;
+}
+
+.page.question-page {
+  background-image: url("../images/question-bg.jpg");
+  background-size: 100% 100%;
+}
+
+.question-body {
+  position: absolute;
+  width: 90%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -60%);
+  -webkit-transform: translate(-50%, -60%);
+  text-align: center; 
+}
+
+.question-body.question-border {
+  background-image: url("../images/cool-border.png");
+  background-size: 100% 100%;
+  padding: 30px 3px 25px 3px;
+}
+
+.question-body.result {
+  color: white;
+  margin-top: 50px;
+}
+
+#result-image {
+  width: 198px;
+  height: 142px;
+  background-image: url("../images/resulttt.jpg");
+  background-position: 0 0;
+  border: 2px solid white;
+  border-radius: 2px;
+}
+
+#result-image-filter {
+  position: absolute;
+  width: 198px;
+  height: 142px;
+  background-image: url("../images/result-filter.png");
+}
+
+.question-item {
+/*  font-family: FZXiYuan;*/
+  color: white;
+  border-radius: 15px;
+  border-width: 0px;
+  text-align: center;
+  font-size: 1em;
+  margin: 5px;
+}
+
+.question-item.question-title { 
+  background: rgba(0, 0, 0, 0.7);
+  padding: 30px 50px 30px 50px;
+}
+
+.question-item.question-answer {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px 50px 20px 50px;
+}
+
+.character-container {
+  width: 200px;
+  margin: auto;
+}
+
+.custom-bg-short {
+  padding: 5px;
+  font-size: 1.5em;
+  font-family: serif;
+  margin-bottom: 20px;
+  background-image: -webkit-linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 25%,
+    rgba(0, 0, 0, 1) 75%,
+    rgba(0, 0, 0, 0) 100% 
+  );
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 25%,
+    rgba(0, 0, 0, 1) 75%,
+    rgba(0, 0, 0, 0) 100% 
+  );
+}
+
+.place-container {
+  width: 100%;
+  margin: auto;
+}
+
+.custom-bg-long {
+  padding: 5px;
+  font-size: 1.5em;
+  font-family: serif;
+  margin-bottom: 20px;
+  background-image: -webkit-linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.6) 30%,
+    rgba(0, 0, 0, 0.8) 45%,
+    rgba(0, 0, 0, 0.8) 55%,
+    rgba(0, 0, 0, 0.6) 70%,
+    rgba(0, 0, 0, 0) 100% 
+  );
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.6) 30%,
+    rgba(0, 0, 0, 0.8) 45%,
+    rgba(0, 0, 0, 0.8) 55%,
+    rgba(0, 0, 0, 0.6) 70%,
+    rgba(0, 0, 0, 0) 100% 
+  );
+}
+
+.some-shadow {
+  text-shadow: 2px 2px 2px black;
+}
+
+.finale {
+  width: 100%;
+  height: 100%;
+  background-image: url("../images/finalee.png");
+  background-size: 258px 350px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* exprimental things hahaha */
+.play_border {
+    margin:auto;
+    border: 2px solid white;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.play_button {
+    position:relative;
+    top: 10px;
+    left: 40%;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid white;
+}
+
+.button-bottom {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  border-width: 0;
+  padding: 10px;
+  margin: auto;
+}
+
+.button-bottom.button-anjuke {
+  margin-top: 5px;
+}
+
+.button-bottom-container {
+  margin: 5%;
+}
+
+.share-to-friend {  
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background-image: url('../images/share.png');
+  background-size: 100% 100%;
+}
