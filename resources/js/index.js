@@ -8,39 +8,79 @@ var gPlaceIndex = 0;
 
 var gCharacter = '';
 var gPlace = '';
-var gShareString = '测一测你是哪类精英！';
+var gShareString = '职场就像动物园，各类生态，千奇百怪。你会是哪种萌物呢? 认识到自己在职场上的形象，更利于给自己做个适合的职场规划。赶快来测一测吧！！';
 
 var questionData = [
-  ["你居住在哪个城市", ["北京", 10], ["上海", 11], ["广州", 12]],
-  ["问题1: 你逃过几次课", ["0次", 0], ["10次以内", 1], ["10次以上", 2]],
-  ["问题2: 你被爸妈打最多的是什么部位", ["最顺手的掴耳光", 1], ["提着裤子卸皮带抽小腿", 2], ["象征性抬手", 0]],
-  ["问题3: 几岁早恋", ["我情商高，学龄前", 2], ["萌动发育时", 1], ["我情商低，没有早恋", 0]],
-  ["问题4: 你考过最低几分", ["和马云一样考过1分", 2], ["和小明一样考过40分", 1], ["呵呵，没不及格过", 0]],
-  ["问题5: 你现在和谁住", ["我爱爸妈，和父母住", 0], ["土豪自己住", 1], ["人脉王，蹭别人的床", 2]],
-  ["问题6: 你吃过蛹吗", ["开玩笑，蛆都吃过", 2], ["开玩笑，那么恶心我怎么会吃", 0], ["嚼过，吐了", 1]],
-  ["问题7: 你喜欢以下哪种妆容", ["欧美前端Ladygaga", 2], ["最美韩妆千颂伊", 0], ["男女通吃的金星", 1]],
-  ["问题8: 你看什么载体的书", ["装逼用的纸质书", 1], ["Bigger Kindle", 0], ["我是说书的", 2]],
-  ["问题9: 早上怎么去公司", ["我soho", 2], ["都行，能到就行", 0], ["睡公司", 1]],
-  ["问题10: 你每天睡几觉", ["一天一觉", 0], ["一天两觉", 1], ["两天一觉", 2]]
+  [/*1*/"周一早上你走进办公室时发现有位西装笔挺的年轻人坐着，你认为他是来找老总谈工作的客人吗？", 
+    ["是", 4], ["不是", 2]
+  ],
+  [/*2*/"老板临时要你加入帮忙解决一个棘手得到项目，你认为他是什么意图？", 
+    ["想测试你的能力，提拔你", 6], ["想给你加活做，刁难你", 4]
+  ],
+  [/*3*/"组里的新同事跟老板很聊得来很熟络，你会觉得有“猫腻”吗恋", 
+    ["有", 5], ["没有", 8]
+  ],
+  [/*4*/"同事被上司单独叫去办公室开会，你认为上司是不满意他的工作表现吗？", 
+    ["是", 11], ["不是", 6]
+  ],
+  [/*5*/"下班后从洗手间出来，你发现所有人都不在办公室，你会继续留下来加班吗？", 
+    ["是", "'A'"], ["不", 9]
+  ],
+  [/*6*/"老板突然问起你正在负责的工作项目，你会认为他对你不够信任吗？吗", 
+    ["会", 7], ["不会", 12]
+  ],
+  [/*7*/"公司里最近招了不少应届毕业生，是你心目中较为满意的吗？", 
+    ["是", 11], ["不是", 9]
+  ],
+  [/*8*/"你会洞察到办公室的同事每天的心情变化吗？", 
+    ["会，我比较敏感", 11], ["不会，我对这些比较迟钝", 12]
+  ],
+  [/*9*/"有个同事突然成为大家谈话的焦点，你也会有意关注他吗？",
+    ["会，好奇", 10], ["不会，专注做自己的", 11]
+  ],
+  [/*10*/"你会重视那些老板身边的左右手，“心腹”吗？", 
+    ["是", 12], ["不是", 11]
+  ],
+  [/*11*/"公司举办的各种活动你是不是都很乐于参加？",
+    ["是", "'B'"], ["不是", 12]
+  ],
+  [/*12*/"你是不是很重视来到你办公桌前的每一个人？", 
+    ["是", "'C'"], ["不是", "'D'"]
+  ]
 ];
 
-var questionResult = [
-  [0, 2, "学霸精英", ["学院路", "松江大学城", "广州大学城"]],
-  [3, 5, "IT精英", ["中关村", "张江", "天河区"]],
-  [6, 7, "金融精英", ["国贸", "陆家嘴", "西塔"]],
-  [8, 10, '美食精英', ['簋街', '定西路', '上下九']],
-  [11, 13, '时尚精英', ['王府井', '新天地', '珠江新城']],
-  [14, 16, '艺术精英', ['798', 'M50', '二沙岛']],
-  [17, 18, '创业精英', ['五道口', '漕河泾开发区', '流窜在广州各处']],
-  [19, 20, '装逼精英', ["三里屯", "淮海路", "沙面"]]
-];
+var questionResult = {
+  A: {
+      type: "A型的你", 
+      title: "温顺的小绵羊", 
+      img: "someimage.img", 
+      description: "你为人善良简单，喜欢过安定平稳的小日子。由于自己与世不争的平和态度，办公室的同事们其实都跟你相处的舒服融洽。对于工作和职场，虽然你并没有太大的野心，但是工作态度认真，只希望能做好份内的工作。需要注意有时人太好的你，可能会被别有用心的人欺负哦！小绵羊要保护自己哦~"
+    },
+  B: {
+      type: "B型的你", 
+      title: "热情乐天的哈士奇", 
+      img: "someimage.img", 
+      description: "你是热情乐天的哈士奇。对于你来说，公司同事相处是否开心融洽比做什么更重要。你乐于助人，喜欢神扯，有时也能成为公司里的开心果。有你在公司气氛总不会太差。只是大咧咧的你有时候对办公室里的风吹草动比较后知后觉。切记还是要眼观六路，耳听八方，三思而后言哦。否则哈士奇族人真的被误认为二，岂不是很冤~"
+    },
+  C: {
+      type: "C型的你", 
+      title: "智商爆表的猫星人", 
+      img: "someimage.img", 
+      description: "猫星人的聪明才智超乎想象。你有敏锐的观察力，又不乏理性的分析能力。面对同样一件工作，你总有最佳的处理方式，所以同事都喜欢向你讨教“锦囊妙方”。你当然也很享受给人出谋划策的成就感，这也使你在公司里小有名气。只是有一套自己的原则的你，不太愿意做违心之事或者像上级妥协，有时可能会因此和同事老板起冲突。喵星人如果愿意适时放下些身段， 可能在职场就所向披靡咯！"
+    },
+  D: {
+      type: "D型的你", 
+      title: "披着羊皮的狼", 
+      img: "someimage.img", 
+      description: '在你和善亲切的外表下，可是藏着一颗永不满足的狂野之心哦。你天资聪颖，能够洞察同事的内心和揣摩上司的意图，属于办公室“大师级”人物。你冷静理智又不失热情，总是不动声色地替同事解决工作困难，所以你获得很多好评。别看你表面上一副与世无争的亲和，其实你很清楚自己要的是什么，以及为了目标该牺牲什么或争取什么。于悠哉游哉的工作态度中螺旋式上升，你这只披着羊皮的狼，可以说是“杀人于无形”啊！'
+    }
+};
 
 var questionTemplate = '<div class="page question-page">\
 <div class="question-body question-border">\
 <div class="question-item question-title">{0}</div>\
-<div class="question-item question-answer" onclick="nextPage({4})">{1}</div>\
-<div class="question-item question-answer" onclick="nextPage({5})">{2}</div>\
-<div class="question-item question-answer" onclick="nextPage({6})">{3}</div>\
+<div class="question-item question-answer" onclick="nextPage({3})">{1}</div>\
+<div class="question-item question-answer" onclick="nextPage({4})">{2}</div>\
 </div></div>';
 
 function addFormatFunction() {
@@ -59,32 +99,18 @@ function loadQuestions() {
   var questionHTML = '';
   for (var index = 0; index < questionData.length; index++) {
     var e = questionData[index];
-    questionHTML += questionTemplate.format(e[0], e[1][0], e[2][0], e[3][0], e[1][1], e[2][1], e[3][1]);
+    questionHTML += questionTemplate.format(e[0], e[1][0], e[2][0], e[1][1], e[2][1]);
   }
   $("#question-container").html(questionHTML);
 }
 
-function judgeWhereYouAre() {
-  var index = -1;
-  for (var i = 0; i < questionResult.length; ++i) {
-    var ele = questionResult[i];
-    if (gTotalScore >= ele[0] && gTotalScore <= ele[1]) {
-      index = i;
-      break;
-    }
-  }
 
-  gCharacter = questionResult[index][2];
-  gPlace = questionResult[index][3][gCityIndex];
-
-  gPlaceIndex = index;
-}
-
-function showResult() {
-  judgeWhereYouAre();
-  $("#result-character").html(gCharacter);
-  $("#result-city").html(questionData[0][gCityIndex + 1][0]);
-  $("#result-place").html(gPlace);
+function showResult(characterType) {
+  var result = questionResult[characterType];
+  $("#result-character").html(result.type);
+  $("#result-title").html(result.title);
+  $("#result-image").html(result.img);
+  $("#result-description").html(result.description);
 
   var imageX = 198 * gCityIndex;
   var imageY = 142 * gPlaceIndex;
@@ -102,25 +128,15 @@ function showResult() {
   resultImageFilter.css('margin-left', resultImageMarginLeft);
 }
 
-function nextPage(score) {
-  if (score < 10) gTotalScore += score;
-  gPageIndex += 1;
+function nextPage(index) {
+  if(isNaN(index)){
+    showResult(index);
 
-  if (score >= 10) {
-    gCityIndex = score - 10;
-  }
-
-  if (gPageIndex >= gPageCount) {
-    gPageIndex = 0;
-  }
-  showPage(gPageIndex);
-
-  if (gPageIndex == gPageCount - 2) {
-    showResult();
-
-    gShareString = document.title = "我是" + gCharacter + ", 混迹于" + gPlace + ", 测测你在哪混";
+    //gShareString = document.title = "我是" + gCharacter + ", 混迹于" + gPlace + ", 测测你在哪混";
     setupWXShare();
     sendData("result", gTotalScore + "|" + document.title);
+  } else {
+    showPage(index);
   }
 }
 

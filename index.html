@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <title>安居客精英地图</title>
+    <title>To Be Customized</title>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="resources/js/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" href="resources/css/index.css"></link>
@@ -14,9 +14,8 @@
   </head>
   
   <body class="some-shadow">
-    <div class="page welcome" onclick="nextPage(0)">
-      <div class="welcome-you">你</div>
-      <div class="welcome-live-right">住对地方了吗?</div>
+    <div class="page welcome" onclick="nextPage(1)">
+      <div class="welcome-live-right">职场就像动物园，各类生态，千奇百怪。你会是哪种萌物呢? 认识到自己在职场上的形象，更利于给自己做个适合的职场规划。赶快来测一测吧！！</div>
       <div class="play_border">
         <div class="play_button"></div>
       </div>
@@ -24,19 +23,14 @@
     <div id="question-container"></div>
     <div class="page question-page">
       <div class="question-body result">
-        <p>你所属的人群是</p>
+        <p>答案:</p>
         <div class="character-container">
           <p class="custom-bg-short">&lt;
-            <span id="result-character">艺术精英</span>&gt;</p>
+            <span id="result-character"></span>&gt;</p>
         </div>
-        <p>在
-          <span id="result-city">上海</span>
-        </p>
-        <p>你最适合居住在</p>
-        <div class="place-container">
-          <p class="custom-bg-long" id="result-place">M50</p>
-        </div>
+        <div id="result-title"></div>
         <div id="result-image"></div>
+        <div id="result-desciption"></div>
         <a href="http://m.anjuke.com"><div id="result-image-filter"></div></a>
         <div class="button-bottom-container">
           <div class="button-bottom" onclick="showShareFriend()">分享到朋友圈</div>
