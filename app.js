@@ -1,35 +1,62 @@
-var port = process.env.PORT || 3000,
-    http = require('http'),
-    fs = require('fs'),
-    html = fs.readFileSync('./public/index.html');
+var port = process.env.PORT || 3000;
+var http = require('http');
+var fs = require('fs');
+var path = require('path');
+var html = fs.readFileSync('./public/index.html');
+var mime = require('mime');
+
+var cache = {};
 
 var log = function(entry) {
     fs.appendFileSync('/tmp/sample-app.log', new Date().toISOString() + ' - ' + entry + '\n');
 };
 
-var server = http.createServer(function (req, res) {
-    if (req.method === 'POST') {
-        var body = '';
+function send404(res) {
+    res.writeHead(404, { 'content-type': 'text/plain' });
+    res.write('Error 404: resource not found.');
+    res.end();
+}
 
-        req.on('data', function(chunk) {
-            body += chunk;
-        });
+function sendFile(res, filePath, fileContents){
+    res.writeHead(200, { 'content-type': mime.lookup(path.basename(filePath)) });
+    res.end(fileContents);
+}
 
-        req.on('end', function() {
-            if (req.url === '/') {
-                log('Received message: ' + body);
-            } else if (req.url = '/scheduled') {
-                log('Received task ' + req.headers['x-aws-sqsd-taskname'] + ' scheduled at ' + req.headers['x-aws-sqsd-scheduled-at']);
-            }
-
-            res.writeHead(200, 'OK', {'Content-Type': 'text/plain'});
-            res.end();
-        });
-    } else {
-        res.writeHead(200);
-        res.write(html);
-        res.end();
+function serveStatic(res, cache, absPath){
+    if (cache[absPath]) {
+        sendFile(res, absPath, cache[absPath]);
     }
+    else {
+        fs.exists(absPath, function (exists) {
+            if (exists) {
+                fs.readFile(absPath, function (err, data) {
+                    if (err) {
+                        send404(response);
+                    }
+                    else {
+                        cache[absPath] = data;
+                        sendFile(res, absPath, data);
+                    }
+                });
+            }
+            else {
+                send404(res);
+            }
+        });
+    }
+}
+
+
+var server = http.createServer(function (req, res) {
+    var filePath = false;
+    if (req.url == '/') {
+        filePath = 'public/index.html';
+    }
+    else {
+        filePath = 'public/' + req.url;
+    }
+    var absPath = './' + filePath;
+    serveStatic(res, cache, absPath);
 });
 
 // Listen on port 3000, IP defaults to 127.0.0.1
