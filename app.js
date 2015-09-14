@@ -1,6 +1,7 @@
 var port = 8080;
 var express = require('express');
 var https = require('https');
+var crypto = require('crypto');
 var app = express();
 
 var accessToken = null;
@@ -86,9 +87,21 @@ function httpsRequest(options, dataCallback, errorCallback) {
 }
 
 function reply (res) {
+  var shaOne = crypto.createHash('sha1');
+  var noncestr = crypto.randomBytes(24).toString('hex');
+
+  var timestamp = new Date().getTime();
+  var url = 'http://localhost:8080/index.html';
+  var string1 = 'jsapi_ticket=' + jsApiTicket + 
+    '&noncestr=' + noncestr + 
+    '&timestamp=' + timestamp + 
+    '&url=' + url;
+  shaOne.update(string1, 'utf8');
   res.send({
     status: 'ok',
-    accessToken: accessToken,
-    jsApiTicket: jsApiTicket
+    appId: 'wx89a57ae8fc980ad9',
+    nonceStr: noncestr,
+    timestamp: timestamp,
+    signature: shaOne.digest('hex'),
   });
 }
