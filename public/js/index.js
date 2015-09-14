@@ -1,5 +1,6 @@
 'use strict';
 
+var gBaseUrl = 'http://localhost:8080'
 var gShareString = '';
 var gShareImage = '';
 
@@ -155,23 +156,21 @@ $(document).ready(function () {
 function setupWXShare() {
     // get json
     $.ajax({
-    url: 'http://www.miugodigital.com/apps/wxjs/wxjsinfo.php',
+    url: gBaseUrl + '/api/wxshare',
     type: 'get',
     cache: true,
     dataType: 'json',
 
     success: function (data, textStatus) {
-      console.log(data);
+      console.log('ajax result: ', data);
       initWXJS(data);
     },
     error: function (XMLHttpRequest, textStatus, errorThrown) {
-      console.log(textStatus);
+      console.log('ajax error: ', textStatus);
     }
     });
 
     function initWXJS(data) {
-    console.log("test data from php");
-    console.log(data);
     wx.config({
       debug: false,
       appId: data['appId'],
