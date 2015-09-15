@@ -1,6 +1,6 @@
 'use strict';
 
-var gBaseUrl = 'http://localhost:8080'
+var gBaseUrl = 'http://default-environment-zfjyjakfyk.elasticbeanstalk.com'
 var gShareString = '';
 var gShareImage = '';
 
@@ -107,7 +107,7 @@ function showResult(characterType) {
   $("#result-description").html(result.description);
   
   gShareString = "我是职场中" +  result.title +  "，你呢？";
-  gShareImage = result.img;
+  gShareImage = gBaseUrl + '/' + result.img;
   hideAllPages();
   $(".page").last().show();
 }
@@ -190,14 +190,14 @@ function setupWXShare() {
       wx.onMenuShareAppMessage({
         title: '百思拓',
         desc: gShareString,
-        link: 'TODO: the link where this website is hosted - to be decided',
+        link: 'http://default-environment-zfjyjakfyk.elasticbeanstalk.com',
         imgUrl: gShareImage
       });
 
     // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
       wx.onMenuShareTimeline({
         title: gShareString,
-        link: 'TODO: the link where this website is hosted - to be decided',
+        link: 'http://default-environment-zfjyjakfyk.elasticbeanstalk.com',
         imgUrl: gShareImage
       });
     });

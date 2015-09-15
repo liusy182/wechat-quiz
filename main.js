@@ -1,4 +1,3 @@
-var port = 8080;
 var express = require('express');
 var https = require('https');
 var crypto = require('crypto');
@@ -20,9 +19,10 @@ app.get('/api/wxshare', function(req, res) {
   }
 });
 
-app.listen(port);
-
-console.log('Listening on port ', port);
+app.set('port', process.env.PORT || 3000);
+var server = app.listen(app.get('port'), function() {
+  console.log('Express server listening on port ' + server.address().port);
+});
 
 function getAccessToken(res) {
   var options = {
@@ -88,20 +88,22 @@ function httpsRequest(options, dataCallback, errorCallback) {
 
 function reply (res) {
   var shaOne = crypto.createHash('sha1');
-  var noncestr = crypto.randomBytes(24).toString('hex');
-
+  var noncestr = crypto.randomBytes(24).toString('base64');
   var timestamp = new Date().getTime();
-  var url = 'http://localhost:8080/index.html';
-  var string1 = 'jsapi_ticket=' + jsApiTicket + 
+  var url = 'http://default-environment-zfjyjakfyk.elasticbeanstalk.com/index.html';
+  var string1 = 'jsapi_ticket=' + jsApiTicket.value + 
     '&noncestr=' + noncestr + 
     '&timestamp=' + timestamp + 
     '&url=' + url;
+  console.log('string1 is: ', string1);
   shaOne.update(string1, 'utf8');
+  var signature = shaOne.digest('hex');
+  console.log('signature is: ', signature);
   res.send({
     status: 'ok',
     appId: 'wx89a57ae8fc980ad9',
     nonceStr: noncestr,
     timestamp: timestamp,
-    signature: shaOne.digest('hex'),
+    signature: signature,
   });
 }
