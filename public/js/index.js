@@ -6,7 +6,7 @@ var gShareImage = '';
 
 var questionData = [
   [/*1*/"周一早上你走进办公室时发现有位西装笔挺的年轻人坐着，你认为他是来找老总谈工作的客人吗？", 
-    ["是", 4], ["不是", 2]
+    ["是", 3], ["不是", 2]
   ],
   [/*2*/"老板临时要你加入帮忙解决一个棘手得到项目，你认为他是什么意图？", 
     ["想测试你的能力，提拔你", 6], ["想给你加活做，刁难你", 4]
@@ -190,14 +190,14 @@ function setupWXShare() {
       wx.onMenuShareAppMessage({
         title: '百思拓',
         desc: gShareString,
-        link: 'http://default-environment-zfjyjakfyk.elasticbeanstalk.com',
+        link: gBaseUrl,
         imgUrl: gShareImage
       });
 
     // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
       wx.onMenuShareTimeline({
         title: gShareString,
-        link: 'http://default-environment-zfjyjakfyk.elasticbeanstalk.com',
+        link: gBaseUrl,
         imgUrl: gShareImage
       });
     });
