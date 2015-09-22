@@ -107,7 +107,9 @@ function showResult(characterType) {
   $("#result-description").html(result.description);
   
   gShareString = "我是职场中" +  result.title +  "，你呢？";
+  document.title = gShareString;
   gShareImage = gBaseUrl + '/' + result.img;
+
   hideAllPages();
   $(".page").last().show();
 }
@@ -116,7 +118,7 @@ function nextPage(index) {
   if(isNaN(index)){
     showResult(index);
 
-    setupWXShare();
+    //setupWXShare();
 
   } else {
     showPage(index);
@@ -150,7 +152,7 @@ $(document).ready(function () {
   loadQuestions();
   showPage(0);
 
-  setupWXShare();
+  //setupWXShare();
 });
 
 function setupWXShare() {
