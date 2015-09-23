@@ -18,35 +18,18 @@ a {
   height: 100%;
 }
 
-.page.welcome {
-  
-  background-size: 100% 100%;
-  text-align: center;
-}
-
-.welcome-you {
-  font-size: 8em;
-  color: white;
-  margin-top: 20%;
-}
-
 .welcome-live-right {
   font-size: 1em;
   color: white;
-  margin-top: 25%;
-  margin-bottom: 15%;
-}
-
-.welcome-start {
-  width: 68px;
-  height: 68px;
-  background-position: 0 0;
-  margin: auto;
+  margin: 25% 5% 15% 5%;
 }
 
 .page.question-page {
   background-size: 100% 100%;
+  background-image: url("../images/backdrop2.jpg");
+  background-repeat: no-repeat;
 }
+
 
 .question-body {
   position: absolute;
@@ -70,13 +53,14 @@ a {
 }
 
 #result-image {
-  width: 160px;
+  width: 75%;
   margin: auto;
   border: 2px solid white;
   border-radius: 2px;
 }
 
 #result-description {
+  background-color: rgba(0, 0, 0, 0.5);
   margin-top: 5px;
 }
 
